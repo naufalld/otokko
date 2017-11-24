@@ -189,7 +189,8 @@ wait = {
     "wblacklist":False,
     "dblacklist":False,
     "protectionOn":True,
-    "atjointicket":False
+    "atjointicket":False,
+    "tag":True
     }
 
 wait2 = {
@@ -880,6 +881,30 @@ def bot(op):
                         cl.sendText(msg.to,"Contact Set Off")
                     else:
                         cl.sendText(msg.to,"Already On")
+	    elif msg.text in ["Tag on","Tag:on"]:
+	        if wait["tag"] == True:
+		    if wait["lang"] = "JP":
+			cl.sendText(msg.to,"Tag Set On")
+		    else:
+			cl.sendText(msg.to,"Already On")
+		else:
+                    wait["tag"] = True
+                    if wait["lang"] == "JP":
+                        cl.sendText(msg.to,"Tag Set On")
+                    else:
+                        cl.sendText(msg.to,"Already On")
+	    elif msg.text in ["Tag off","Tag:off"]:
+	        if wait["tag"] == False:
+		    if wait["lang"] = "JP":
+			cl.sendText(msg.to,"Tag Set Off")
+		    else:
+			cl.sendText(msg.to,"Already Off")
+		else:
+                    wait["tag"] = False
+                    if wait["lang"] == "JP":
+                        cl.sendText(msg.to,"Tag Set Off")
+                    else:
+                        cl.sendText(msg.to,"Already Off")
             elif msg.text in ["è‡ªå‹•å‚åŠ :ã‚ªãƒ³","Join on","Auto join:on","è‡ªå‹•åƒåŠ ï¼šé–‹"]:
                 if wait["autoJoin"] == True:
                     if wait["lang"] == "JP":
@@ -976,25 +1001,27 @@ def bot(op):
             elif msg.text in ["Set"]:
             	group = cl.getGroup(msg.to)
                 md = ""
-                if wait["contact"] == True: md+=" Contact : on\n"
-                else: md+=" Contact : off\n"
-                if wait["autoJoin"] == True: md+=" Auto join : on\n"
-                else: md +=" Auto join : off\n"
-                if wait["autoCancel"]["on"] == True:md+=" Group cancel :" + str(wait["autoCancel"]["members"]) + "\n"
-                else: md+= " Group cancel : off\n"
-                if group.preventJoinByTicket == False:md+=" Url : on\n"
-                else: md+=" Url : off\n"
-                if wait["leaveRoom"] == True: md+=" Auto leave : on\n"
-                else: md+=" Auto leave : off\n"
-                if wait["timeline"] == True: md+=" Share : on\n"
-                else:md+=" Share : off\n"
-                if wait["autoAdd"] == True: md+=" Auto add : on\n"
-                else:md+=" Auto add : off\n"
-                if wait["commentOn"] == True: md+=" Comment : on\n"
-                else:md+=" Comment : off\n"
-                if wait["atjointicket"] == True: md+=" Auto Join Group by Ticket : on\n"
-                else:md+=" Auto Join Group by Ticket : off\n"
-                cl.sendText(msg.to,md)
+                if wait["contact"] == True: md+="􀜁􀇍Cyberpunk Girl􏿿 Contact : Active\n"
+                else: md+="􀜁􀇍Cyberpunk Girl􏿿 Contact : Not Active\n"
+                if wait["autoJoin"] == True: md+="􀜁􀇍Cyberpunk Girl􏿿 Auto join : Active\n"
+                else: md +="􀜁􀇍Cyberpunk Girl􏿿 Auto join : Not Active\n"
+                if wait["autoCancel"]["on"] == True:md+="􀜁􀇍Cyberpunk Girl􏿿 Group cancel :" + str(wait["autoCancel"]["members"]) + "\n"
+                else: md+= "􀜁􀇍Cyberpunk Girl􏿿 Group cancel : Not Active\n"
+                if group.preventJoinByTicket == False:md+="􀜁􀇍Cyberpunk Girl􏿿 Url : Active\n"
+                else: md+="􀜁􀇍Cyberpunk Girl􏿿 Url : Not Active\n"
+                if wait["leaveRoom"] == True: md+="􀜁􀇍Cyberpunk Girl􏿿 Auto leave : Active\n"
+                else: md+="􀜁􀇍Cyberpunk Girl􏿿 Auto leave : Not Active\n"
+                if wait["timeline"] == True: md+="􀜁􀇍Cyberpunk Girl􏿿 Share : Active\n"
+                else:md+="􀜁􀇍Cyberpunk Girl􏿿 Share : Not Active\n"
+                if wait["autoAdd"] == True: md+="􀜁􀇍Cyberpunk Girl􏿿 Auto add : Active\n"
+                else:md+="􀜁􀇍Cyberpunk Girl􏿿 Auto add : Not Active\n"
+                if wait["commentOn"] == True: md+="􀜁􀇍Cyberpunk Girl􏿿 Comment : Active\n"
+                else:md+="􀜁􀇍Cyberpunk Girl􏿿 Comment : Not Active\n"
+                if wait["atjointicket"] == True: md+="􀜁􀇍Cyberpunk Girl􏿿 Auto Join Group by Ticket : Active\n"
+                else:md+="􀜁􀇍Cyberpunk Girl􏿿 Auto Join Group by Ticket : Not Active\n"
+		if wait["tag"] == True: md+="􀜁􀇍Cyberpunk Girl􏿿 Tag : Active\n"
+                else: md +="􀜁􀇍Cyberpunk Girl􏿿 Tag : Not Active\n"
+                cl.sendText(msg.to,"◤Settings◢\n" + md + "Date & Time Take:\nDate : " + datetime.datetime.today().strftime('%d-%m-%y') + "\nTime : " + datetime.datetime.today().strftime('%H:%M:%S'))
             elif "album merit " in msg.text:
                 gid = msg.text.replace("album merit ","")
                 album = cl.getAlbum(gid)
@@ -1580,11 +1607,13 @@ def bot(op):
                     except:
                         pass			
         if op.type == 26:
-	    elif "@"+cl.getProfile().displayName in msg.text:
-                tanya = msg.text.replace("@"+cl.getProfile().displayName,"")
-                jawab = ("Jgn Tag Si "+cl.getProfile().displayName+"!!","Berisik jgn tag si "+cl.getProfile().displayName+" dia masih tidur")
-                jawaban = random.choice(jawab)
-                cl.sendText(msg.to,jawaban)
+	    if wait["tag"] == True:
+		if wait["lang"] = "JP":
+	            elif "@"+cl.getProfile().displayName in msg.text:
+                        tanya = msg.text.replace("@"+cl.getProfile().displayName,"")
+                        jawab = ("Jgn Tag Si "+cl.getProfile().displayName+"!!","Berisik jgn tag si "+cl.getProfile().displayName+" dia masih tidur")
+                        jawaban = random.choice(jawab)
+                        cl.sendText(msg.to,jawaban)
 	if op.type == 59:
             print op
 
