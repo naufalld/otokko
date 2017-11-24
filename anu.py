@@ -1471,7 +1471,7 @@ def bot(op):
 	    elif "show " in msg.text:
 		if msg.contactType == 3:
 		    anu = msg.text.replace("show ", "")
-		    cl.sendText(msg.to, text=None, contentMetadata={'userid': anu}, contentType=13)
+		    cl.sendText(msg.to, text=None, contentMetadata={'userid': anu}, contactType=3, contentType=13)
 #------------------------------------------------------------------		    
 	    elif "Spam " in msg.text:
                 txt = msg.text.split(" ")
