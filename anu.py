@@ -883,7 +883,7 @@ def bot(op):
                         cl.sendText(msg.to,"Already On")
 	    elif msg.text in ["Tag on","Tag:on"]:
 	        if wait["tag"] == True:
-		    if wait["lang"] = "JP":
+		    if wait["lang"] == "JP":
 			cl.sendText(msg.to,"Tag Set On")
 		    else:
 			cl.sendText(msg.to,"Already On")
@@ -895,7 +895,7 @@ def bot(op):
                         cl.sendText(msg.to,"Already On")
 	    elif msg.text in ["Tag off","Tag:off"]:
 	        if wait["tag"] == False:
-		    if wait["lang"] = "JP":
+		    if wait["lang"] == "JP":
 			cl.sendText(msg.to,"Tag Set Off")
 		    else:
 			cl.sendText(msg.to,"Already Off")
