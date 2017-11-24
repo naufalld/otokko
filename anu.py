@@ -1375,7 +1375,7 @@ def bot(op):
 		for nganu in anu:
 		    anu += "[-] " + msg
                 try:
-                    cl.sendMessage("◤Mention◢\n" + anu)
+                    cl.sendMessage("◤Mention◢\n" + nganu)
                 except Exception as error:
                     print error
 #------------------------------------------------------------------	
@@ -1467,11 +1467,7 @@ def bot(op):
 		cl.sendText(msg.to,"Result...")
 		cl.sendText(msg.to,path)
 #------------------------------------------------------------------
-	    
-	    elif "show " in msg.text:
-		if msg.contactType == 3:
-		    anu = msg.text.replace("show ", "")
-		    cl.sendText(msg.to, contact=None, luid=None, contentMetadata={'userid': anu}, contactType=3, contentType=13)
+	   
 #------------------------------------------------------------------		    
 	    elif "Spam " in msg.text:
                 txt = msg.text.split(" ")
@@ -1583,7 +1579,13 @@ def bot(op):
                         cl.sendText(msg.to,str(e))
                     except:
                         pass			
-        if op.type == 59:
+        if op.type == 26:
+	    elif "@"+cl.getProfile().displayName in msg.text:
+                tanya = msg.text.replace("@"+cl.getProfile().displayName,"")
+                jawab = ("Jgn Tag Si "+cl.getProfile().displayName+"!!","Berisik jgn tag si "+cl.getProfile().displayName+" dia masih tidur")
+                jawaban = random.choice(jawab)
+                cl.sendText(msg.to,jawaban)
+	if op.type == 59:
             print op
 
 
