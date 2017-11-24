@@ -1608,6 +1608,7 @@ def bot(op):
                         pass
 		
         if op.type == 26:
+	    msg = op.message
 	    if wait["tag"] == True:
 		if wait["lang"] == "JP":
 	            elif "@" in msg.text:
