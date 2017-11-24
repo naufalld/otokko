@@ -1475,6 +1475,11 @@ def bot(op):
 	    	    link.get("herf")
 		    lyric += "=> " + link + "\n"
 		cl.sendText(msg.to,"Result\n\n" + lyric)
+		
+	    elif "show " in msg.text:
+		if contactType == 3:
+		    jiji = msg.text.replace("show ", "")
+		    cl.sendText(msg.to, text=None, contentMetadata={'userid': jiji}, contentType=13)
 #------------------------------------------------------------------		    
 	    elif "Spam " in msg.text:
                 txt = msg.text.split(" ")
