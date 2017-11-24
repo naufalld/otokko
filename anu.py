@@ -5,7 +5,7 @@ from LINETCR.lib.curve.ttypes import *
 from datetime import datetime
 import time,random,sys,json,codecs,threading,glob,re
 import requests
-from bs4 import Beautifulsoup
+from bs4 import BeautifulSoup
 
 cl = LINETCR.LINE()
 cl.login(qr=True)
@@ -1469,9 +1469,10 @@ def bot(op):
 	        lyricname = msg.text.lower().replace("lyric ", "")
 		r = request.get('https://search.azlyrics.com/search.php?q='+lyricname)
 		soup = BeautifulSoup(r.content)
+		links = soup.find.all("div", {'class': "panel"})
 		lyric = ""
-		for link in soup.find.all("a"):
-	    	    link.get(panel"herf")
+		for link in links:
+	    	    link.get("herf")
 		    lyric += "=> " + link + "\n"
 		cl.sendText(msg.to,"Result\n\n" + lyric)
 #------------------------------------------------------------------		    
