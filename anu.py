@@ -1608,12 +1608,12 @@ def bot(op):
                         pass			
         if op.type == 26:
 	    if wait["tag"] == True:
-		if wait["lang"] = "JP":
+		if wait["lang"] == "JP":
 	            elif "@"+cl.getProfile().displayName in msg.text:
                         tanya = msg.text.replace("@"+cl.getProfile().displayName,"")
                         jawab = ("Jgn Tag Si "+cl.getProfile().displayName+"!!","Berisik jgn tag si "+cl.getProfile().displayName+" dia masih tidur")
                         jawaban = random.choice(jawab)
-                        cl.sendText(msg.to,jawaban)
+                        cl.sendText(msg.to,"[Auto Respond]\n" + jawaban)
 	if op.type == 59:
             print op
 
