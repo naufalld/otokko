@@ -1354,28 +1354,30 @@ def bot(op):
                 cl.sendText(msg.to, "%sseconds" % (elapsed_time))
 
 #------------------------------------------------------------------		
-	    elif "tagall" in msg.text:
-		group = cl.getGroup(msg.to)
-		nama = [contact.mid for contact in group.members]
-		cb = ""
-		cb2 = ""
-		strt = int(0)
-		akh = int(0)
-		for md in nama:
-		    akh = akh + int(5)	
-		    cb += """{"S":"""+json.dumps(str(strt))+""","E":"""+json.dumps(str(akh))+""","M":"""+json.dumps(md)+"},"""
-		    strt = strt + int(6)
-		    akh = akh + 1
-		    cb2 += "@nrik\n"
-		   
-		cb = (cb[:int(len(cb)-1)])
-		msg.contentType = 0
-		msg.text = cb2
-		msg.contentMetadata ={'MENTION':'{"MENTIONEES":['+cb+']}','EMTVER':'4'}
-		try:
-		    cl.sendText(msg)
-		except Exception as error:
-		    print error	
+	    elif msg.text in ["Mention","mention","Tag","tag"]:
+                group = cl.getGroup(msg.to)
+                nama = [contact.mid for contact in group.members]
+                cb = ""
+                cb2 = ""
+		anu = ""
+                strt = int(0)
+                akh = int(0)
+                for md in nama:
+                    akh = akh + int(5)
+                    cb += """{"S":"""+json.dumps(str(strt))+""","E":"""+json.dumps(str(akh))+""","M":"""+json.dumps(md)+"},"""
+                    strt = strt + int(6)
+                    akh = akh + 1
+                    cb2 += "@nrik\n"
+                cb = (cb[:int(len(cb)-1)])
+                msg.contentType = 0
+                msg.text = cb2
+                msg.contentMetadata ={'MENTION':'{"MENTIONEES":['+cb+']}','EMTVER':'4'}
+		for nganu in anu:
+		    anu += "[-] " + msg
+                try:
+                    cl.sendMessage("◤Mention◢\n" + anu)
+                except Exception as error:
+                    print error
 #------------------------------------------------------------------	
             elif "Steal home @" in msg.text:            
                 print "[Command]dp executing"
@@ -1465,21 +1467,11 @@ def bot(op):
 		cl.sendText(msg.to,"Result...")
 		cl.sendText(msg.to,path)
 #------------------------------------------------------------------
-	    elif "lyric " in msg.text.lower():
-	        lyricname = msg.text.lower().replace("lyric ", "")
-		r = request.get('https://search.azlyrics.com/search.php?q='+lyricname)
-		soup = BeautifulSoup(r.content)
-		links = soup.find.all("div", {'class': "panel"})
-		lyric = ""
-		for link in links:
-	    	    link.get("herf")
-		    lyric += "=> " + link + "\n"
-		cl.sendText(msg.to,"Result\n\n" + lyric)
-		
+	    
 	    elif "show " in msg.text:
 		if contactType == 3:
-		    jiji = msg.text.replace("show ", "")
-		    cl.sendText(msg.to, text=None, contentMetadata={'userid': jiji}, contentType=13)
+		    anu = msg.text.replace("show ", "")
+		    cl.sendText(msg.to, text=None, contentMetadata={'userid': anu}, contentType=13)
 #------------------------------------------------------------------		    
 	    elif "Spam " in msg.text:
                 txt = msg.text.split(" ")
