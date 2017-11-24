@@ -4,6 +4,8 @@ import LINETCR
 from LINETCR.lib.curve.ttypes import *
 from datetime import datetime
 import time,random,sys,json,codecs,threading,glob,re
+import requests
+from bs4 import Beautifulsoup
 
 cl = LINETCR.LINE()
 cl.login(qr=True)
@@ -1442,32 +1444,42 @@ def bot(op):
                     cover = ""
                 cl.sendText(msg.to,"[Display Name]:\n" + anu.displayName + "\n[Mid]:\n" + mid + "\n[BIO]:\n" + anu.statusMessage + "\n[Ava]:\nhttp://dl.profile.line-cdn.net/" + anu.pictureStatus + "\n[Cover]:\n" + str(cover))
 #------------------------------------------------------------------
-	        elif "Bokep " in msg.text:
-		        bkp = msg.text.replace("Bokep ", "")
-		        anu = bkp.rstrip(' ')
-		        path = "http://xvideos.com/?k=" + anu
-		        path2 = "http://xhamster.com/search?q=" + anu
-		        cl.sendText(msg.to,"Best Result...")
-		        cl.sendText(msg.to,path)
-		        cl.sendText(msg.to,path2)
-	        elif "Google " in msg.text:
-		        ggl = msg.text.replace("Google ", "")
-	    	    anu = ggl.rstrip(' ')
-    		    path = "http://google.com/search?q=" + anu
-	    	    cl.sendText(msg.to,"Best Result...")
-		        cl.sendText(msg.to,path)
+	    elif "Bokep " in msg.text:
+	        bkp = msg.text.replace("Bokep ", "")
+	        anu = bkp.rstrip(' ')
+	        path = "http://xvideos.com/?k=" + anu
+	        path2 = "http://xhamster.com/search?q=" + anu
+	        cl.sendText(msg.to,"Best Result...")
+	        cl.sendText(msg.to,path)
+	        cl.sendText(msg.to,path2)
+	    elif "Google " in msg.text:
+	        ggl = msg.text.replace("Google ", "")
+       	        anu = ggl.rstrip(' ')
+    	        path = "http://google.com/search?q=" + anu
+	    	cl.sendText(msg.to,"Best Result...")
+		cl.sendText(msg.to,path)
             elif "Youtube " in msg.text:
-		        yt = msg.text.replace("Youtube ", "")
+		yt = msg.text.replace("Youtube ", "")
                 anu = yt.rstrip(' ')
-		        path = "https://www.youtube.com/results?search_query=" + anu
-		        cl.sendText(msg.to,"Result...")
-		        cl.sendText(msg.to,path)
+		path = "https://www.youtube.com/results?search_query=" + anu
+		cl.sendText(msg.to,"Result...")
+		cl.sendText(msg.to,path)
+#------------------------------------------------------------------
+	    elif "lyric " in msg.text.lower():
+	        lyricname = msg.text.lower().replace("lyric ", "")
+		r = request.get('https://search.azlyrics.com/search.php?q='+lyricname)
+		soup = BeautifulSoup(r.content)
+		lyric = ""
+		for link in soup.find.all("a"):
+	    	    link.get(panel"herf")
+		    lyric += "=> " + link + "\n"
+		cl.sendText(msg.to,"Result\n\n" + lyric)
 #------------------------------------------------------------------		    
-		elif "Spam " in msg.text:
-            txt = msg.text.split(" ")
-            jmlh =int(txt[2])
-            teks = msg.text.replace("Spam "+str(txt[1])+" "+str(jmlh)+" ","")
-            tulisan = jmlh * (teks+"\n")
+	    elif "Spam " in msg.text:
+                txt = msg.text.split(" ")
+                jmlh =int(txt[2])
+                teks = msg.text.replace("Spam "+str(txt[1])+" "+str(jmlh)+" ","")
+                tulisan = jmlh * (teks+"\n")
             if txt[1] == "on":
                 if jmlh <= 60000000:
                     for x in range(jmlh):
