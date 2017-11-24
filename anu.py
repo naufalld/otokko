@@ -1605,11 +1605,12 @@ def bot(op):
                     try:
                         cl.sendText(msg.to,str(e))
                     except:
-                        pass			
+                        pass
+		
         if op.type == 26:
 	    if wait["tag"] == True:
 		if wait["lang"] == "JP":
-	            elif msg.text in ["@"+cl.getProfile().displayName]:
+	            elif "@" + cl.getProfile().displayName + in msg.text:
                         tanya = msg.text.replace("@"+cl.getProfile().displayName,"")
                         jawab = ("Jgn Tag Si "+cl.getProfile().displayName+"!!","Berisik jgn tag si "+cl.getProfile().displayName+" dia masih tidur")
                         jawaban = random.choice(jawab)
