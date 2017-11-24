@@ -1,2 +1,0 @@
-# otokko
-nganu
