@@ -1610,11 +1610,24 @@ def bot(op):
         if op.type == 26:
 	    if wait["tag"] == True:
 		if wait["lang"] == "JP":
-	            elif "@" + cl.getProfile().displayName + in msg.text:
-                        tanya = msg.text.replace("@"+cl.getProfile().displayName,"")
-                        jawab = ("Jgn Tag Si "+cl.getProfile().displayName+"!!","Berisik jgn tag si "+cl.getProfile().displayName+" dia masih tidur")
-                        jawaban = random.choice(jawab)
-                        cl.sendText(msg.to,"[Auto Respond]\n" + jawaban)
+	            elif "@" in msg.text:
+			_name = msg.text.replace("@","")
+                        _nametarget = _name.rstrip('  ')
+                        gs = cl.getGroup(msg.to)
+                        targets = []
+                        for g in gs.members:
+                            if _nametarget == g.displayName:
+                                targets.append(g.mid)
+                        if targets == []:
+                            cl.sendText(msg.to,"Error")
+                        else:
+                            for target in targets:
+                                try:
+                                    jawab = ("Jangan Tag Si "+cl.getProfile(target).displayName+"!!","Berisik jgn tag si "+cl.getProfile(target).displayName+" dia masih tidur")
+                                    jawaban = random.choice(jawab)
+                                    cl.sendText(msg.to,"[Auto Respond]\n" + jawaban)
+				except:
+                                    cl.sendText(msg.to,"Error")
 	if op.type == 59:
             print op
 
