@@ -1611,7 +1611,7 @@ def bot(op):
 	    msg = op.message
 	    if wait["tag"] == True:
 		if wait["lang"] == "JP":
-	            elif "@" in msg.text:
+	            if "@" in msg.text:
 			_name = msg.text.replace("@","")
                         _nametarget = _name.rstrip('  ')
                         gs = cl.getGroup(msg.to)
