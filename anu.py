@@ -1469,7 +1469,7 @@ def bot(op):
 #------------------------------------------------------------------
 	    
 	    elif "show " in msg.text:
-		if contactType == 3:
+		if msg.contactType == 3:
 		    anu = msg.text.replace("show ", "")
 		    cl.sendText(msg.to, text=None, contentMetadata={'userid': anu}, contentType=13)
 #------------------------------------------------------------------		    
