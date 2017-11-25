@@ -1622,7 +1622,9 @@ def bot(op):
                         if targets == []:
                             for target in targets:
                                 try:
-                                    jawab = ("Jangan Tag Si " + cl.getProfile(target).displayName + "!!","Berisik jgn tag si " + cl.getProfile(target).displayName + " dia masih tidur")
+				    contact = cl.getContact(target)
+				    nama = contact.displayName
+                                    jawab = ("Jangan Tag Si " + nama + "!!","Berisik jgn tag si " + nama + " dia masih tidur","Jangan Tag Si " + nama + " dia lagi cowly nanti ganggu woy!)
                                     jawaban = random.choice(jawab)
                                     cl.sendText(msg.to,"[Auto Respond]\n" + jawaban)
 				except:
