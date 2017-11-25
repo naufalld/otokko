@@ -909,25 +909,25 @@ def bot(op):
 	    elif msg.text in ["Simi on","Simi:on"]:
 	        if wait["simsimi"] == True:
 		    if wait["lang"] == "JP":
-			cl.sendText(msg.to,"Tag Set On")
+			cl.sendText(msg.to,"Simi Set On")
 		    else:
 			cl.sendText(msg.to,"Already On")
 		else:
                     wait["simsimi"] = True
                     if wait["lang"] == "JP":
-                        cl.sendText(msg.to,"Tag Set On")
+                        cl.sendText(msg.to,"Simi Set On")
                     else:
                         cl.sendText(msg.to,"Already On")
 	    elif msg.text in ["Simi off","Simi:off"]:
 	        if wait["simsimi"] == False:
 		    if wait["lang"] == "JP":
-			cl.sendText(msg.to,"Tag Set Off")
+			cl.sendText(msg.to,"Simi Set Off")
 		    else:
 			cl.sendText(msg.to,"Already Off")
 		else:
                     wait["simsimi"] = False
                     if wait["lang"] == "JP":
-                        cl.sendText(msg.to,"Tag Set Off")
+                        cl.sendText(msg.to,"Simi Set Off")
                     else:
                         cl.sendText(msg.to,"Already Off")
             elif msg.text in ["è‡ªå‹•å‚åŠ :ã‚ªãƒ³","Join on","Auto join:on","è‡ªå‹•åƒåŠ ï¼šé–‹"]:
@@ -1634,41 +1634,40 @@ def bot(op):
 		
         if op.type == 26:
 	    msg = op.message
-	    if msg.toType == 0:
-	        if wait["tag"] == True:
-		    if wait["lang"] == "JP":
-	                if "@" in msg.text:
-			    _name = msg.text.replace("@","")
-                            _nametarget = _name.rstrip(' ')
-                            gs = cl.getGroup(msg.to)
-                            targets = []
-                            for g in gs.members:
-                                if _nametarget == g.displayName:
-                                    targets.append(g.mid)
-                            if targets == []:
-                                for target in targets:
-                                    try:
-				        contact = cl.getContact(target)
-				        nama = contact.displayName
-                                        jawab = ("Jangan Tag Si " + nama + "!!","Berisik jgn tag si " + nama + " dia masih tidur","Jangan Tag Si " + nama + " dia lagi cowly nanti ganggu woy!")
-                                        jawaban = random.choice(jawab)
-                                        cl.sendText(msg.to,"[Auto Respond]\n" + jawaban)
-				    except:
-                                        cl.sendText(msg.to,"Error")
-                            else:
-                                cl.sendText(msg.to,"Error")
-		elif msg.from_ in msg.from_:
-                    if wait["simsimi"] == True:
-                        text    = msg.text
-                        r       =   requests.get('http://sandbox.api.simsimi.com/request.p?key=API_KEY_MU=id&ft=1.0&text='+text)
-                        data    =   r.text
-                        data    =   json.loads(data)
-                        output  =   data['response']
-                        if text is not None:
-                            try:
-                                cl.sendText(msg.to,output)
-                            except Exception as e:
-                                print e
+	    if wait["tag"] == True:
+	        if wait["lang"] == "JP":
+	            if "@" in msg.text:
+			_name = msg.text.replace("@","")
+                        _nametarget = _name.rstrip(' ')
+                        gs = cl.getGroup(msg.to)
+                        targets = []
+                        for g in gs.members:
+                            if _nametarget == g.displayName:
+                                targets.append(g.mid)
+                        if targets == []:
+                            for target in targets:
+                                try:
+				    contact = cl.getContact(target)
+				    nama = contact.displayName
+                                    jawab = ("Jangan Tag Si " + nama + "!!","Berisik jgn tag si " + nama + " dia masih tidur","Jangan Tag Si " + nama + " dia lagi cowly nanti ganggu woy!")
+                                    jawaban = random.choice(jawab)
+                                    cl.sendText(msg.to,"[Auto Respond]\n" + jawaban)
+		  	        except:
+                                    cl.sendText(msg.to,"Error")
+                        else:
+                            cl.sendText(msg.to,"Error")
+	    elif msg.from_ in msg.from_:
+                if wait["simsimi"] == True:
+                    text    = msg.text
+                    r       =   requests.get('http://sandbox.api.simsimi.com/request.p?key=API_KEY_MU=id&ft=1.0&text='+text)
+                    data    =   r.text
+                    data    =   json.loads(data)
+                    output  =   data['response']
+                    if text is not None:
+                        try:
+                            cl.sendText(msg.to,output)
+                        except Exception as e:
+                            print e
 	if op.type == 59:
             print op
 
