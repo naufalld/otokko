@@ -501,42 +501,6 @@ def bot(op):
         if op.type == 24:
             if wait["leaveRoom"] == True:
                 cl.leaveRoom(op.param1)
-	if op.type == 26:
-	    msg = op.message
-	    if wait["tag"] == True:
-	        if wait["lang"] == "JP":
-	            if "@" in msg.text:
-			_name = msg.text.replace("@","")
-                        _nametarget = _name.rstrip(' ')
-                        gs = cl.getGroup(msg.to)
-                        targets = []
-                        for g in gs.members:
-                            if _nametarget == g.displayName:
-                                targets.append(g.mid)
-                        if targets == []:
-                            for target in targets:
-                                try:
-				    contact = cl.getContact(target)
-				    nama = contact.displayName
-                                    jawab = ("Jangan Tag Si " + nama + "!!","Berisik jgn tag si " + nama + " dia masih tidur","Jangan Tag Si " + nama + " dia lagi cowly nanti ganggu woy!")
-                                    jawaban = random.choice(jawab)
-                                    cl.sendText(msg.to,"[Auto Respond]\n" + jawaban)
-		  	        except:
-                                    cl.sendText(msg.to,"Error")
-                        else:
-                            cl.sendText(msg.to,"Error")
-	    elif msg.from_ in msg.from_:
-                if wait["simsimi"] == True:
-                    text    = msg.text
-                    r       =   requests.get('http://sandbox.api.simsimi.com/request.p?key=API_KEY_MU=id&ft=1.0&text='+text)
-                    data    =   r.text
-                    data    =   json.loads(data)
-                    output  =   data['response']
-                    if text is not None:
-                        try:
-                            cl.sendText(msg.to,output)
-                        except Exception as e:
-                            print e
         if op.type == 25:
             msg = op.message
             if msg.toType == 0:
@@ -1084,7 +1048,7 @@ def bot(op):
                 else: md +="􀜁􀇍Cyberpunk Girl􏿿 Tag : Not Active\n"
 		if wait["simsimi"] == True: md+="􀜁􀇍Cyberpunk Girl􏿿 Simi : Active\n"
                 else: md +="􀜁􀇍Cyberpunk Girl􏿿 Simi : Not Active\n"
-                cl.sendText(msg.to,"◤Settings◢\n" + md + "Support By : L͠D̨ ̧͟͞T̛E̶4͢M͏")
+                cl.sendText(msg.to,"◤Settings◢\n\n" + md + "\nSupport By : L͠D̨ ̧͟͞T̛E̶4͢M͏")
             elif "album merit " in msg.text:
                 gid = msg.text.replace("album merit ","")
                 album = cl.getAlbum(gid)
@@ -1465,7 +1429,7 @@ def bot(op):
 		for nganu in anu:
 		    anu += "[-] " + msg
                 try:
-                    cl.sendMessage("◤Mention◢\n" + nganu)
+                    cl.sendMessage(msg.to,"◤Mention◢\n" + nganu)
                 except Exception as error:
                     print error
 #------------------------------------------------------------------	
@@ -1557,7 +1521,38 @@ def bot(op):
 		cl.sendText(msg.to,"Result...")
 		cl.sendText(msg.to,path)
 #------------------------------------------------------------------
-	   
+	    elif "bio " in msg.text:
+                nk0 = msg.text.replace("bio ","")
+                nk1 = nk0.lstrip()
+                nk2 = nk1.replace("@","")
+                nk3 = nk2.rstrip()
+                _name = nk3
+                gs = cl.getGroup(msg.to)
+                targets = []
+                for s in gs.members:
+                    if _name in s.displayName:
+                       targets.append(s.mid)
+                if targets == []:
+                    cl.sendText(msg.to,"user does not exist")
+                    pass
+                else:
+                    for target in targets:
+                       try:
+                           contact = cl.getContact(target)
+                           y = contact.statusMessage
+                           cl.sendText(msg.to,"Status Message:\n" + y)
+                       except Exception as e:
+                           cl.sendText(msg.to,"Error")
+                           print e
+	    elif "mid @" in msg.text:
+                _name = msg.text.replace("mid @","")
+                _nametarget = _name.rstrip(' ')
+                gs = cl.getGroup(msg.to)
+                for g in gs.members:
+                    if _nametarget == g.displayName:
+                        cl.sendText(msg.to, g.mid)
+                    else:
+                        pass
 #------------------------------------------------------------------		    
 	    elif "Spam " in msg.text:
                 txt = msg.text.split(" ")
