@@ -1620,15 +1620,15 @@ def bot(op):
                             if _nametarget == g.displayName:
                                 targets.append(g.mid)
                         if targets == []:
-                            cl.sendText(msg.to,"Error")
-                        else:
                             for target in targets:
                                 try:
-                                    jawab = ("Jangan Tag Si "+cl.getProfile(target).displayName+"!!","Berisik jgn tag si "+cl.getProfile(target).displayName+" dia masih tidur")
+                                    jawab = ("Jangan Tag Si " + cl.getProfile(target).displayName + "!!","Berisik jgn tag si " + cl.getProfile(target).displayName + " dia masih tidur")
                                     jawaban = random.choice(jawab)
                                     cl.sendText(msg.to,"[Auto Respond]\n" + jawaban)
 				except:
                                     cl.sendText(msg.to,"Error")
+                        else:
+                            cl.sendText(msg.to,"Error")
 	if op.type == 59:
             print op
 
